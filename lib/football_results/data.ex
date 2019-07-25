@@ -9,6 +9,17 @@ defmodule FootballResults.Data do
   alias FootballResults.Data.Match
 
   @doc """
+  return a list of pairs.
+
+  A pair is the tuple (division, season), and the list is read from the database
+  with a SELECT DISTINCT clause.
+  """
+  def list_pairs do
+    query = from m in "matches", distinct: [m.division, m.season], select: %{:division => m.division, :season => m.season}
+    Repo.all(query)
+  end
+
+  @doc """
   Returns the list of matches.
 
   ## Examples

@@ -15,3 +15,6 @@
  2) render(conn, "index.protobuf", match: match) or whatever, add the pattern match in match_view.ex and use exprotobuf to return the right thing.
 
  For now, we'll go for 3 and 2.
+
+ [2019-07-25 Thu 11:24] SELECT DISTINCT division, season FROM matches;
+ [2019-07-25 Thu 11:33] alternatively, get all matches from the matches table and use elixir list manipulation functions
