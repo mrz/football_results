@@ -1,0 +1,17 @@
+#+TITLE: Notes and journal
+
+* notes
+ Alternatives to Phoenix: [[https://github.com/elixir-maru/maru][Maru]] (likely smaller than Phoenix and we are not
+ leveraging most of the stuff phx can give us).
+
+ [2019-07-25 Thu 11:09] How should the format be requested by the user, and how
+ should be honor that request?
+ 1) path segment: /api/json/matches and /api/protobuf/matches
+ 2) request param: /api/matches?format=json
+ 3) request header: curl -H "Content-Type: application/json" localhost:4000/api/matches and curl -H "Content-Type: application/octet-stream" localhost:4000/api/matches
+ If we go for the third option, which seems to be the one that respects most
+ semantics, how should we honor the request server side?
+ 1) a plug to go side by side with the json plug?
+ 2) render(conn, "index.protobuf", match: match) or whatever, add the pattern match in match_view.ex and use exprotobuf to return the right thing.
+
+ For now, we'll go for 3 and 2.
