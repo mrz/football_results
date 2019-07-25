@@ -20,7 +20,7 @@ defmodule FootballResults.MixProject do
   def application do
     [
       mod: {FootballResults.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
@@ -40,6 +40,7 @@ defmodule FootballResults.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:timex, "~> 3.5"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"}
