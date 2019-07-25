@@ -1,26 +1,13 @@
 defmodule FootballResultsWeb.Router do
   use FootballResultsWeb, :router
 
-  pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/", FootballResultsWeb do
-    pipe_through :browser
+  scope "/api", FootballResultsWeb do
+    pipe_through :api
 
-    get "/", PageController, :index
+    resources "/matches", MatchController, only: [:index, :show]
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", FootballResultsWeb do
-  #   pipe_through :api
-  # end
 end
