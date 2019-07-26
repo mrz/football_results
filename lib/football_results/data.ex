@@ -7,6 +7,7 @@ defmodule FootballResults.Data do
   alias FootballResults.Repo
 
   alias FootballResults.Data.Match
+  alias FootballResults.Data.Protobuf
 
   @doc """
   return a list of pairs.
@@ -15,7 +16,11 @@ defmodule FootballResults.Data do
   with a SELECT DISTINCT clause.
   """
   def list_pairs do
-    query = from m in Match, distinct: [m.division, m.season], select: %{:division => m.division, :season => m.season}
+    query =
+      from m in Match,
+        distinct: [m.division, m.season],
+        select: %{:division => m.division, :season => m.season}
+
     Repo.all(query)
   end
 
@@ -119,5 +124,41 @@ defmodule FootballResults.Data do
   """
   def change_match(%Match{} = match) do
     Match.changeset(match, %{})
+  end
+
+  def serialize_matches_to_protobuf(matches) do
+    Enum.map(matches, &serialize_match_to_protobuf/1)
+  end
+
+  def serialize_match_to_protobuf(match) do
+    {:ok, date} = Timex.format(match.date, "{D}/{M}/{YYYY}")
+
+    Protobuf.Match.new(
+      id: match.id,
+      division: match.division,
+      season: match.season,
+      hteam: match.hteam,
+      ateam: match.ateam,
+      fthg: match.fthg,
+      ftag: match.ftag,
+      ftr: match.ftr,
+      hthg: match.hthg,
+      htag: match.htag,
+      htr: match.htr,
+      date: date
+    )
+    |> Protobuf.Match.encode()
+  end
+
+  def serialize_pairs_to_protobuf(pairs) do
+    Enum.map(pairs, &serialize_pair_to_protobuf/1)
+  end
+
+  def serialize_pair_to_protobuf(pair) do
+    Protobuf.Pair.new(
+      division: pair.division,
+      season: pair.season
+    )
+    |> Protobuf.Pair.encode()
   end
 end
