@@ -20,7 +20,7 @@ defmodule FootballResults.MixProject do
   def application do
     [
       mod: {FootballResults.Application, []},
-      extra_applications: [:logger, :runtime_tools, :timex]
+      extra_applications: [:logger, :runtime_tools, :timex, :exprotobuf]
     ]
   end
 
@@ -44,7 +44,8 @@ defmodule FootballResults.MixProject do
       {:timex, "~> 3.5"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:exprotobuf, "~> 1.2.17"}
     ]
   end
 
