@@ -15,7 +15,7 @@ defmodule FootballResults.Data do
   with a SELECT DISTINCT clause.
   """
   def list_pairs do
-    query = from m in "matches", distinct: [m.division, m.season], select: %{:division => m.division, :season => m.season}
+    query = from m in Match, distinct: [m.division, m.season], select: %{:division => m.division, :season => m.season}
     Repo.all(query)
   end
 
@@ -30,6 +30,14 @@ defmodule FootballResults.Data do
   """
   def list_matches do
     Repo.all(Match)
+  end
+
+  @doc """
+  Returns all the matches for the given division and season
+  """
+  def list_matches_by_divison_and_season(division, season) do
+    query = from m in Match, where: m.division == ^division and m.season == ^season
+    Repo.all(query)
   end
 
   @doc """

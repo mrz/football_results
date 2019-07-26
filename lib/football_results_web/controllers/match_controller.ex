@@ -6,7 +6,12 @@ defmodule FootballResultsWeb.MatchController do
 
   action_fallback FootballResultsWeb.FallbackController
 
-  def index(conn, _params) do
+  def index(conn, %{"division" => division, "season" => season}) do
+    matches = Data.list_matches_by_divison_and_season(division, season)
+    render(conn, "index.json", matches: matches)
+  end
+
+  def index(conn, params) do
     matches = Data.list_matches()
     render(conn, "index.json", matches: matches)
   end
