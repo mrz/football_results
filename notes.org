@@ -8,11 +8,13 @@
  should be honor that request?
  1) path segment: /api/json/matches and /api/protobuf/matches
  2) request param: /api/matches?format=json
- 3) request header: curl -H "Content-Type: application/json" localhost:4000/api/matches and curl -H "Content-Type: application/octet-stream" localhost:4000/api/matches
+ 3) request header: curl -H "Content-Type: application/json" localhost:4000/api/matches
+    and curl -H "Content-Type: application/octet-stream" localhost:4000/api/matches
  If we go for the third option, which seems to be the one that respects most
  semantics, how should we honor the request server side?
  1) a plug to go side by side with the json plug?
- 2) render(conn, "index.protobuf", match: match) or whatever, add the pattern match in match_view.ex and use exprotobuf to return the right thing.
+ 2) render(conn, "index.protobuf", match: match) or whatever, add the pattern
+    match in match_view.ex and use exprotobuf to return the right thing.
 
  For now, we'll go for 3 and 2.
 
@@ -21,4 +23,10 @@
 
  [2019-07-26 Fri 16:09] [[https://sentry.io/welcome/][Sentry]] could be used for logging?
 
+ At the end of it, the above mentioned solution of returning the "right" thing in
+ match_view.ex was abandoned in favor of using Plug.Conn.send_resp/3 directly in
+ the controller.
+
  [2019-07-27 Sat 12:14] [[https://github.com/api-hogs/bureaucrat][bureaucrat]] could be used to automatize API documentation
+
+ Dockerfile and docker-compose.yaml were built using mainly [[https://pspdfkit.com/blog/2018/how-to-run-your-phoenix-application-with-docker/][this]] and [[https://github.com/nicbet/docker-phoenix][this]] resources as starting point.
