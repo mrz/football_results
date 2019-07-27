@@ -29,7 +29,7 @@ defmodule FootballResultsWeb.MatchController do
 
       ["application/octet-stream"] ->
         data = Data.serialize_matches_to_protobuf(matches)
-        Plug.Conn.send_resp(conn, data)
+        Plug.Conn.send_resp(conn, 200, data)
     end
   end
 

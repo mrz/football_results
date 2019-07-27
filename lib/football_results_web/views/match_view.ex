@@ -13,8 +13,9 @@ defmodule FootballResultsWeb.MatchView do
   end
 
   def render("match.json", %{match: match}) do
+    {:ok, date} = Timex.format(match.date, "{D}/{M}/{YYYY}")
+
     %{
-      id: match.id,
       division: match.division,
       season: match.season,
       hteam: match.hteam,
@@ -24,7 +25,8 @@ defmodule FootballResultsWeb.MatchView do
       ftr: match.ftr,
       hthg: match.hthg,
       htag: match.htag,
-      htr: match.htr
+      htr: match.htr,
+      date: date
     }
   end
 end

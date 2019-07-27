@@ -5,8 +5,13 @@ defmodule FootballResultsWeb.PairControllerTest do
   alias FootballResults.Data.Match
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    conn =
+      conn
+      |> put_req_header("content-type", "application/json")
+
+    {:ok, conn: conn}
   end
+
 
   describe "index" do
     test "lists all pairs", %{conn: conn} do

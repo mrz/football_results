@@ -3,6 +3,7 @@ defmodule FootballResultsWeb.MatchControllerTest do
 
   alias FootballResults.Data
   alias FootballResults.Data.Match
+  alias FootballResults.Data.Protobuf
 
   @valid_attrs %{
     ateam: "some ateam",
@@ -45,18 +46,58 @@ defmodule FootballResultsWeb.MatchControllerTest do
   }
 
   def fixture(:match) do
-    {:ok, match} = Data.create_match(@create_attrs)
+    {:ok, match} = Data.create_match(@valid_attrs)
     match
   end
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    {:ok, conn: conn}
   end
 
   describe "index" do
-    test "lists all matches", %{conn: conn} do
+    test "lists all matches (proto)", %{conn: conn} do
+      match = fixture(:match)
+
+      conn =
+        conn
+        |> put_req_header("content-type", "application/octet-stream")
+
       conn = get(conn, Routes.match_path(conn, :index))
-      assert json_response(conn, 200)["data"] == []
+
+      response = response(conn, 200)
+
+      expected = Data.serialize_match_to_protobuf(match)
+
+      assert response == expected
+    end
+
+    test "lists all matches (json)", %{conn: conn} do
+      fixture(:match)
+
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> get(Routes.match_path(conn, :index))
+
+      response = json_response(conn, 200)["data"]
+
+      expected = [
+        %{
+          "ateam" => "some ateam",
+          "division" => "some division",
+          "ftag" => 42,
+          "fthg" => 42,
+          "ftr" => "D",
+          "htag" => 42,
+          "hteam" => "some hteam",
+          "hthg" => 42,
+          "htr" => "D",
+          "season" => 42,
+          "date" => "20/8/2016"
+        }
+      ]
+
+      assert response == expected
     end
   end
 
