@@ -1,20 +1,13 @@
 # FootballResults
 
-To start your Phoenix server:
+To start the application:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
+  * Create and start the pgsql docker container with `./start_postgres.sh`; if
+    it's the first time, edit the file and uncomment the first command, which
+    creates the volume
+  * Create, migrate and seed the database with `./setup_db.sh`; this step
+    requires the `Data.csv` file in the root of the project
+  * Install Node.js dependencies with `cd assets && npm install && node
+    node_modules/webpack/bin/webpack.js --mode development`
   * Start Phoenix endpoint with `mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix

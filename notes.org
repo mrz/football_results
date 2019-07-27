@@ -20,3 +20,5 @@
  [2019-07-25 Thu 11:33] alternatively, get all matches from the matches table and use elixir list manipulation functions
 
  [2019-07-26 Fri 16:09] [[https://sentry.io/welcome/][Sentry]] could be used for logging?
+
+ [2019-07-27 Sat 12:14] [[https://github.com/api-hogs/bureaucrat][bureaucrat]] could be used to automatize API documentation
