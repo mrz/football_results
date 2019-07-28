@@ -34,5 +34,10 @@
  Haproxy setup build using [[https://hub.docker.com/r/dockercloud/haproxy/][dockercloud/haproxy]] together with [[https://medium.com/@nirgn/load-balancing-applications-with-haproxy-and-docker-d719b7c5b231][this]] and [[https://www.thecuriousdev.org/haproxy-load-balancing-docker-swarm/][this]] tutorials.
 
  docker build -t phoenix:v1 .
+
  docker swarm init
- docker stack deploy --compose-file=./docker-compose.yaml football_results
+ docker stack deploy --compose-file=./docker-compose.yaml fb
+
+ # get docker0 ip
+ ip addr show docker0
+ curl -H "Content-Type: application/json" http://${DOCKER0_IP}:80/api/matches/SP1/201516

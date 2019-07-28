@@ -21,7 +21,7 @@ services:
       - web
   # Our Phoenix container
   phoenix:
-    image: phoenix
+    image: phoenix:v1
     # The build parameters for this container.
     build:
       # Here we define that it should build from the current directory
@@ -35,7 +35,7 @@ services:
       # Hostname of our Postgres container
       PGHOST: db
       SERVICE_PORTS: 4000
-      VIRTUAL_HOST: "/api/*"
+      # VIRTUAL_HOST: "/api/*"
     ports:
       - "4000"
     networks:
