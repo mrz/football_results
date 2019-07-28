@@ -18,6 +18,7 @@ RUN mix local.hex --force \
 RUN mkdir /app
 COPY . /app
 WORKDIR /app
+EXPOSE 4000
 
 RUN mix local.hex --force
 

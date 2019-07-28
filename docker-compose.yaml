@@ -35,6 +35,7 @@ services:
       # Hostname of our Postgres container
       PGHOST: db
       SERVICE_PORTS: 4000
+      VIRTUAL_HOST: "/api/*"
     ports:
       - "4000"
     networks:
@@ -58,7 +59,6 @@ services:
     environment:
       - BALANCE=leastconn
       - ADDITIONAL_SERVICES=project_dir:phoenix,project_dir:db
-      - DEBUG=1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
