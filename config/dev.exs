@@ -5,7 +5,6 @@ config :football_results, FootballResults.Repo,
   username: "postgres",
   password: "postgres",
   database: "football_results_dev",
-  hostname: "db",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
