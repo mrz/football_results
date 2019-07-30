@@ -10,12 +10,12 @@ defmodule FootballResults.Data do
   alias FootballResults.Data.Protobuf
 
   @doc """
-  return a list of pairs.
+  return a list of seasons.
 
-  A pair is the tuple (division, season), and the list is read from the database
+  A season is the tuple (division, season), and the list is read from the database
   with a SELECT DISTINCT clause.
   """
-  def list_pairs do
+  def list_seasons do
     query =
       from m in Match,
         distinct: [m.division, m.season],
@@ -150,15 +150,15 @@ defmodule FootballResults.Data do
     |> Protobuf.Match.encode()
   end
 
-  def serialize_pairs_to_protobuf(pairs) do
-    Enum.map(pairs, &serialize_pair_to_protobuf/1)
+  def serialize_seasons_to_protobuf(seasons) do
+    Enum.map(seasons, &serialize_season_to_protobuf/1)
   end
 
-  def serialize_pair_to_protobuf(pair) do
-    Protobuf.Pair.new(
-      division: pair.division,
-      season: pair.season
+  def serialize_season_to_protobuf(season) do
+    Protobuf.Season.new(
+      division: season.division,
+      season: season.season
     )
-    |> Protobuf.Pair.encode()
+    |> Protobuf.Season.encode()
   end
 end

@@ -1,4 +1,4 @@
-defmodule FootballResultsWeb.PairControllerTest do
+defmodule FootballResultsWeb.SeasonControllerTest do
   use FootballResultsWeb.ConnCase
 
   alias FootballResults.Data
@@ -14,8 +14,8 @@ defmodule FootballResultsWeb.PairControllerTest do
 
 
   describe "index" do
-    test "lists all pairs", %{conn: conn} do
-      conn = get(conn, Routes.pair_path(conn, :index))
+    test "lists all seasons", %{conn: conn} do
+      conn = get(conn, Routes.season_path(conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end

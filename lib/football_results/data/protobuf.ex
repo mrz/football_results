@@ -15,7 +15,7 @@ defmodule FootballResults.Data.Protobuf do
     required string date     = 12;
   }
 
-  message Pair {
+  message Season {
     required string division = 1;
     required int32 season = 2;
   }

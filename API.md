@@ -14,9 +14,9 @@ curl -H "Content-Type: application/octet-stream" localhost:4000/api/matches/SP1/
 ```
 
 
-## Pairs
+## Seasons
 
-A pair is the tuple (division, season)
+A season is the tuple (division, season)
 
 ### Structure
 
@@ -27,9 +27,9 @@ A pair is the tuple (division, season)
 
 ### Methods
 
-| Method | HTTP request   | Description                 |
-|--------|----------------|-----------------------------|
-| index  | GET /api/pairs | returns all available pairs |
+| Method | HTTP request     | Description                   |
+|--------|------------------|-------------------------------|
+| index  | GET /api/seasons | returns all available seasons |
 
 
 ## Matches
