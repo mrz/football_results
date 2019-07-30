@@ -20,3 +20,5 @@ With docker-compose
     service and the football_results service replicated over 3 containers.
     Access to the API is through haproxy, bound on the port 80, and can be
     reached through the docker0 network interface.
+
+API reference is available [here](API.md).
