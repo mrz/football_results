@@ -10,6 +10,8 @@ defmodule FootballResults.Application do
     children = [
       # Start the Ecto repository
       FootballResults.Repo,
+      # Start the Instrumentation module to attach all event handlers
+      FootballResults.Instrumentation,
       # Start the endpoint when the application starts
       FootballResultsWeb.Endpoint
       # Starts a worker by calling: FootballResults.Worker.start_link(arg)
